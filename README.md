@@ -1,5 +1,4 @@
-![license](https://img.shields.io/badge/license-MIT-blue.svg)
-
+[![Material Kit - React](https://github.com/devias-io/material-kit-react/blob/main/public/assets/thumbnail.png)](https://material-kit-react.devias.io/)
 ## Quick start
 - Make sure your Node.js and npm versions are up to date for `React 18`
 
