@@ -1,3 +1,5 @@
+![license](https://img.shields.io/badge/license-MIT-blue.svg)
+
 ## Quick start
 - Make sure your Node.js and npm versions are up to date for `React 18`
 
