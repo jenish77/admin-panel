@@ -32,12 +32,12 @@ const states = [
 
 export const AccountProfileDetails = () => {
   const [values, setValues] = useState({
-    firstName: 'Anika',
-    lastName: 'Visser',
-    email: 'demo@devias.io',
+    firstName: '',
+    lastName: '',
+    email: '',
     phone: '',
-    state: 'los-angeles',
-    country: 'USA'
+    password: '',
+    
   });
 
   const handleChange = useCallback(
@@ -132,6 +132,19 @@ export const AccountProfileDetails = () => {
                 md={6}
               >
                 <TextField
+                  // fullWidth
+                  label="password"
+                  name="password"
+                  onChange={handleChange}
+                  type="password"
+                  value={values.password}
+                />
+              </Grid>
+              {/* <Grid
+                xs={12}
+                md={6}
+              >
+                <TextField
                   fullWidth
                   label="Country"
                   name="country"
@@ -139,8 +152,8 @@ export const AccountProfileDetails = () => {
                   required
                   value={values.country}
                 />
-              </Grid>
-              <Grid
+              </Grid> */}
+              {/* <Grid
                 xs={12}
                 md={6}
               >
@@ -163,7 +176,7 @@ export const AccountProfileDetails = () => {
                     </option>
                   ))}
                 </TextField>
-              </Grid>
+              </Grid> */}
             </Grid>
           </Box>
         </CardContent>
