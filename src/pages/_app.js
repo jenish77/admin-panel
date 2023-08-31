@@ -1,3 +1,4 @@
+import React from 'react';
 import Head from 'next/head';
 import { CacheProvider } from '@emotion/react';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -9,6 +10,8 @@ import { useNProgress } from 'src/hooks/use-nprogress';
 import { createTheme } from 'src/theme';
 import { createEmotionCache } from 'src/utils/create-emotion-cache';
 import 'simplebar-react/dist/simplebar.min.css';
+import { ToastContainer } from 'react-toastify'; // Import the ToastContainer
+import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for toast styles
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -27,7 +30,7 @@ const App = (props) => {
     <CacheProvider value={emotionCache}>
       <Head>
         <title>
-        Admin Panel
+          Admin Panel
         </title>
         <meta
           name="viewport"
@@ -38,6 +41,7 @@ const App = (props) => {
         <AuthProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
+            <ToastContainer /> {/* Place ToastContainer here */}
             <AuthConsumer>
               {
                 (auth) => auth.isLoading

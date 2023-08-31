@@ -1,9 +1,13 @@
 import { useCallback, useState } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 import Head from 'next/head';
 import NextLink from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+// import Swal from 'sweetalert2';
 import {
   Alert,
   Box,
@@ -25,8 +29,8 @@ const Page = () => {
   const [method, setMethod] = useState('email');
   const formik = useFormik({
     initialValues: {
-      email: 'demo@devias.io',
-      password: 'Password123!',
+      email: '',
+      password: '',
       submit: null
     },
     validationSchema: Yup.object({
@@ -42,12 +46,40 @@ const Page = () => {
     }),
     onSubmit: async (values, helpers) => {
       try {
-        await auth.signIn(values.email, values.password);
+        const response = await axios.post('http://localhost:3001/api/student/login', {
+          email: values.email,
+          password: values.password,
+        });
+        toast.success('Login successful!');
+        // toast.success('Logged in successfully!', {
+        //   position: 'top-right',
+        //   autoClose: 3000,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        // });
         router.push('/');
-      } catch (err) {
-        helpers.setStatus({ success: false });
-        helpers.setErrors({ submit: err.message });
-        helpers.setSubmitting(false);
+        console.log(response.data.token);
+        
+      } 
+      catch (error) {
+        console.log("ahiya aav");
+        toast.error('Login failed. Please check your credentials.');
+        // toast.error('Login failed. Please check your credentials.', {
+        //   position: 'top-right',
+        //   autoClose: 5000,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        // });
+        // console.log("ERROR", error);
+        // helpers.setStatus({ success: false });
+        // helpers.setErrors({ submit: error.message }); // Replace "err" with "error"
+        // helpers.setSubmitting(false);
       }
     }
   });
@@ -124,10 +156,10 @@ const Page = () => {
                 label="Email"
                 value="email"
               />
-              <Tab
+              {/* <Tab
                 label="Phone Number"
                 value="phoneNumber"
-              />
+              /> */}
             </Tabs>
             {method === 'email' && (
               <form
@@ -198,7 +230,7 @@ const Page = () => {
                 </Alert>
               </form>
             )}
-            {method === 'phoneNumber' && (
+            {/* {method === 'phoneNumber' && (
               <div>
                 <Typography
                   sx={{ mb: 1 }}
@@ -210,7 +242,7 @@ const Page = () => {
                   To prevent unnecessary costs we disabled this feature in the demo.
                 </Typography>
               </div>
-            )}
+            )} */}
           </div>
         </Box>
       </Box>
