@@ -50,7 +50,15 @@ const Page = () => {
           email: values.email,
           password: values.password,
         });
-        toast.success('Login successful!');
+        if(response.status == true){
+          toast.success('Logged in successfully!')
+          router.push('/');
+          console.log(response.data.token);
+          
+        }
+        else{
+          toast.error('Login failed. Please check your credentials.');
+        }
         // toast.success('Logged in successfully!', {
         //   position: 'top-right',
         //   autoClose: 3000,
@@ -60,9 +68,7 @@ const Page = () => {
         //   draggable: true,
         //   progress: undefined,
         // });
-        router.push('/');
-        console.log(response.data.token);
-        
+       
       } 
       catch (error) {
         console.log("ahiya aav");
