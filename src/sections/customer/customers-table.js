@@ -75,7 +75,7 @@ export const CustomersTable = (props) => {
             <TableBody>
               {items.map((customer) => {
                 const isSelected = selected.includes(customer.id);
-                const createdAt = format(customer.createdAt, 'dd/MM/yyyy');
+                const createdAt = format(new Date(customer.createdAt), 'dd/MM/yyyy'); // Assuming customer.createdAt is a valid date string
 
                 return (
                   <TableRow
@@ -102,10 +102,10 @@ export const CustomersTable = (props) => {
                         spacing={2}
                       >
                         <Avatar src={customer.avatar}>
-                          {getInitials(customer.name)}
+                          {getInitials(customer.first_name + ' ' + customer.last_name)} {/* Assuming first_name and last_name are provided */}
                         </Avatar>
                         <Typography variant="subtitle2">
-                          {customer.name}
+                          {customer.user_name}
                         </Typography>
                       </Stack>
                     </TableCell>
@@ -113,10 +113,10 @@ export const CustomersTable = (props) => {
                       {customer.email}
                     </TableCell>
                     <TableCell>
-                      {customer.address.city}, {customer.address.state}, {customer.address.country}
+                      {customer.address}
                     </TableCell>
                     <TableCell>
-                      {customer.phone}
+                      {customer.mobile}
                     </TableCell>
                     <TableCell>
                       {createdAt}
