@@ -44,48 +44,24 @@ const Page = () => {
         .max(255)
         .required('Password is required')
     }),
-    onSubmit: async (values, helpers) => {
+    onSubmit: async (values, helpers) => {   
       try {
         const response = await axios.post('http://localhost:3001/api/student/login', {
           email: values.email,
           password: values.password,
         });
-        if(response.status == true){
+        if(response.data.status == true){
           toast.success('Logged in successfully!')
           router.push('/');
-          console.log(response.data.token);
+          console.log("here",response.data.data);
           
         }
         else{
           toast.error('Login failed. Please check your credentials.');
         }
-        // toast.success('Logged in successfully!', {
-        //   position: 'top-right',
-        //   autoClose: 3000,
-        //   hideProgressBar: false,
-        //   closeOnClick: true,
-        //   pauseOnHover: true,
-        //   draggable: true,
-        //   progress: undefined,
-        // });
-       
       } 
       catch (error) {
-        console.log("ahiya aav");
         toast.error('Login failed. Please check your credentials.');
-        // toast.error('Login failed. Please check your credentials.', {
-        //   position: 'top-right',
-        //   autoClose: 5000,
-        //   hideProgressBar: false,
-        //   closeOnClick: true,
-        //   pauseOnHover: true,
-        //   draggable: true,
-        //   progress: undefined,
-        // });
-        // console.log("ERROR", error);
-        // helpers.setStatus({ success: false });
-        // helpers.setErrors({ submit: error.message }); // Replace "err" with "error"
-        // helpers.setSubmitting(false);
       }
     }
   });
