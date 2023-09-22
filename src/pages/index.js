@@ -45,7 +45,7 @@ const Page = () => {
       console.error('Error uploading image:', error);
     }
   };
-console.log("HERERRERERE");
+
   const fetchData = async () => {
     try {
       const categoryResponse = await axios.get('http://localhost:3001/api/student/show-category');
