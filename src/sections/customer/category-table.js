@@ -74,6 +74,17 @@ export const CategoryTable = (props) => {
     }
   };
   
+  const handleAddText = async (id) => {
+    try {
+      const response = await axios.get(`http://localhost:3001/api/student/show-category-by-id?id=${id}`);
+      const categoryData = response.data;
+      
+      window.location.href = `/category/${id}`;
+    } catch (error) {
+      console.error('Error fetching category data:', error);
+    }
+  };
+
   return (
     <Card>
       <Scrollbar>
@@ -132,8 +143,36 @@ export const CategoryTable = (props) => {
                       {category.category_name}
                     </TableCell>
                     <TableCell>
-                      <button className="editButton" onClick={() => handleCategoryEditClick(category.id, category.category_name)}>Edit</button>
-                      <button className="deleteButton" onClick={() => handleDelete(category.id)}>Delete</button>
+                    <div style={{ display: 'flex', gap: '10px' }}>
+                      <button style={{ 
+                      backgroundColor: '#4CAF50', 
+                      color: '#FFFFFF', 
+                      padding: '10px 20px', 
+                      fontSize: '14px', 
+                      border: 'none', 
+                      borderRadius: '4px', 
+                      cursor: 'pointer',
+                    }} className="editButton" onClick={() => handleCategoryEditClick(category.id, category.category_name)}>Edit</button>
+                      <button style={{ 
+                      backgroundColor: '#FF0000', 
+                      color: '#FFFFFF', 
+                      padding: '10px 20px', 
+                      fontSize: '14px', 
+                      border: 'none', 
+                      borderRadius: '4px', 
+                      cursor: 'pointer',
+                    }}  className="deleteButton" onClick={() => handleDelete(category.id)}>Delete</button>
+                    
+                     <button style={{ 
+                      backgroundColor: '#00bfff', 
+                      color: '#FFFFFF', 
+                      padding: '10px 20px', 
+                      fontSize: '14px', 
+                      border: 'none', 
+                      borderRadius: '4px', 
+                      cursor: 'pointer',
+                    }}  className="AddButton" onClick={() => handleAddText(category.id)}>View</button>
+                    </div>
                     </TableCell>
                   </TableRow>
                 );

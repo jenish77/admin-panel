@@ -73,6 +73,16 @@ export const items = [
     )
   },
   {
+    title: 'Category',
+    path: '/category/:id',
+    
+    icon: (
+      <SvgIcon fontSize="small">
+        <UserPlusIcon />
+      </SvgIcon>
+    )
+  },
+  {
     title: 'Error',
     path: '/404',
     icon: (
