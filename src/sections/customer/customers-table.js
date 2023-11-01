@@ -10,12 +10,17 @@ import {
   TableBody,
   TableCell,
   TableHead,
-  TablePagination,
   TableRow,
-  Typography
+  Typography,
+  Button,
+  TablePagination
 } from '@mui/material';
 import { Scrollbar } from 'src/components/scrollbar';
 import { getInitials } from 'src/utils/get-initials';
+
+const redirectToChat = (customerId) => {
+  window.location.href = `/chat/${customerId}`;
+};
 
 export const CustomersTable = (props) => {
   const {
@@ -70,12 +75,15 @@ export const CustomersTable = (props) => {
                 <TableCell>
                   Signed Up
                 </TableCell>
+                <TableCell>
+                  Actions
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {items.map((customer) => {
                 const isSelected = selected.includes(customer.id);
-                const createdAt = format(new Date(customer.createdAt), 'dd/MM/yyyy'); // Assuming customer.createdAt is a valid date string
+                const createdAt = format(new Date(customer.createdAt), 'dd/MM/yyyy');
 
                 return (
                   <TableRow
@@ -102,7 +110,7 @@ export const CustomersTable = (props) => {
                         spacing={2}
                       >
                         <Avatar src={customer.avatar}>
-                          {getInitials(customer.first_name + ' ' + customer.last_name)} {/* Assuming first_name and last_name are provided */}
+                          {getInitials(customer.first_name + ' ' + customer.last_name)}
                         </Avatar>
                         <Typography variant="subtitle2">
                           {customer.user_name}
@@ -120,6 +128,11 @@ export const CustomersTable = (props) => {
                     </TableCell>
                     <TableCell>
                       {createdAt}
+                    </TableCell>
+                    <TableCell>
+                      <Button variant="contained" color="primary" onClick={() => redirectToChat(customer.id)}>
+                        Chat
+                      </Button>
                     </TableCell>
                   </TableRow>
                 );

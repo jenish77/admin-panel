@@ -7,6 +7,11 @@ import NextLink from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { gauth , googleProvider} from "../../firebase/firebaseConfig";
+// import { auth , googleProvider} from "../firebase/firebaseConfig";
+// import { createUserWithEmailAndPassword,signInWithPopup, signOut } from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+// import { useState } from "react";
 // import Swal from 'sweetalert2';
 import {
   Alert,
@@ -65,6 +70,14 @@ const Page = () => {
       }
     }
   });
+
+  const signInWithGoogle = async () => {
+    try {
+      await signInWithPopup(gauth,googleProvider);
+    } catch (err){
+      console.error(err);
+    }
+  };
 
   const handleMethodChange = useCallback(
     (event, value) => {
@@ -197,19 +210,19 @@ const Page = () => {
                   fullWidth
                   size="large"
                   sx={{ mt: 3 }}
+                  onClick={signInWithGoogle}
+                  variant="contained"
+                >
+                  Sign In with Google
+                </Button>
+                <Button
+                  fullWidth
+                  size="large"
+                  sx={{ mt: 3 }}
                   onClick={handleSkip}
                 >
                   Skip authentication
                 </Button>
-                <Alert
-                  color="primary"
-                  severity="info"
-                  sx={{ mt: 3 }}
-                >
-                  <div>
-                    You can use <b>demo@devias.io</b> and password <b>Password123!</b>
-                  </div>
-                </Alert>
               </form>
             )}
             {/* {method === 'phoneNumber' && (
